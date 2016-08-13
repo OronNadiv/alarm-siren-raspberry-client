@@ -3,7 +3,7 @@ const error = require('debug')('ha:client:error')
 
 const config = require('./config')
 const diehard = require('diehard')
-const LED = require('./led')
+const LED = require('raspberry-pi-led')
 const Siren = require('./siren')
 const SocketIO = require('./socket-io')
 const Promise = require('bluebird')

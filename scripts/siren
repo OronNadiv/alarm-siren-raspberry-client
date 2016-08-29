@@ -3,15 +3,12 @@
 # Then place this file in the user's root directory.
 
 cd ~/alarm-siren-raspberry-client
-git pull --rebase
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 nvm use
 export PRIVATE_KEY=<PASTE GENERATED PRIVATE KEY>
 export NODE_ENV=production
-export LOG_LEVEL=info
 export LOGIN_URL=https://<LOGIN_SERVER_URL>
-export PINS_MOTION_SENSOR=<GPIO PIN FOR MOTION SENSOR>
-export MOTION_SENSOR_LOCATION=<LOCATION>
-export SERVER_URL=https://<ALARM_SERVER_URL>
+export PINS_SIREN_ACTIVE_SIGNAL=<GPIO PIN FOR MOTION SENSOR>
+export PUSH_URL=https://<PUSH_SERVER_URL>
 npm start

@@ -22,7 +22,6 @@ __PINS\_CLIENT\_UP__ (optional): GPIO pin (output) that sets to high when client
 __PINS\_CONNECTED\_TO\_SERVER__ (optional): GPIO pin (output) that sets to high when client is connected to server. Default: `none`  
 __PINS\_SIREN\_ACTIVE\_SIGNAL__ (required): GPIO pin (output) that turns on the relay that connected to the siren.  
 __PRIVATE\_KEY__ (required): generated private key.  Public key should be shared with the [authentication][auth-url] server. See [here][private-public-keys-url].  
-__PUSH\_URL__ (required): url to the [push][push-url] server. Example: `push.herokuapp.com`
 
 \<TODO\> Circuit Diagram
 
@@ -53,6 +52,5 @@ __PUSH\_URL__ (required): url to the [push][push-url] server. Example: `push.her
 [camera-url]: https://github.com/OronNadiv/camera-api
 [garage-url]: https://github.com/OronNadiv/garage-door-api
 [notifications-url]: https://github.com/OronNadiv/notifications-api
-[push-url]: https://github.com/OronNadiv/push-api
 [storage-url]: https://github.com/OronNadiv/storage-api
 [ui-url]: https://github.com/OronNadiv/home-automation-ui

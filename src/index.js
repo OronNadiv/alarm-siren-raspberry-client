@@ -10,8 +10,7 @@ const client = new Client()
 Promise
   .resolve(client.run())
   .then(() => info('Client is running.',
-    'Login URL:', config.loginUrl,
-    'Push URL:', config.pushUrl
+    'Login URL:', config.loginUrl
   ))
   .catch(err => {
     error('Error while running client.', err)

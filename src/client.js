@@ -5,15 +5,14 @@ const config = require('./config')
 const diehard = require('diehard')
 const LED = require('raspberry-pi-led')
 const Siren = require('./siren')
-const SocketIO = require('./socket-io')
 const Promise = require('bluebird')
+const pubnubConnect = require('./pubnub')
 
 class Client {
   constructor () {
     this.ledClientUp = new LED('PIN_CLIENT_UP', config.pins.clientUp)
     this.ledConnectedToServer = new LED('PIN_CONNECTED_TO_SERVER', config.pins.connectedToServer)
     this.siren = new Siren()
-    this.socketIO = new SocketIO(this.ledConnectedToServer)
   }
 
   run () {
@@ -25,36 +24,41 @@ class Client {
       .then(() => self.ledConnectedToServer.initialize())
       .then(() => self.ledConnectedToServer.turnOff())
       .then(() => {
-        const options = {
-          subject: '/motions',
-          audience: 'urn:home-automation/alarm',
-          rooms: ['sirens', 'alarm-sensors'],
-          events: [
-            {
-              name: 'TOGGLE_CREATED',
-              callback: data => {
-                info('TOGGLE_CREATED called.', 'data:', data)
-                if (data.is_armed) {
-                  return
-                }
-                return Promise
-                  .resolve(self.siren.turnOff())
-                  .catch(err => error('While calling siren.turnOff.', 'err:', err))
+        const events = [
+          {
+            system: 'ALARM',
+            type: 'TOGGLE_CREATED',
+            callback: data => {
+              info('TOGGLE_CREATED called.', 'data:', data)
+              if (data.is_armed) {
+                return
               }
-            },
-            {
-              name: 'MOTION_CREATED',
-              callback: data => {
-                info('MOTION_CREATED called.', 'data:', data)
-                return Promise
-                  .resolve(self.siren.turnOn())
-                  .catch(err => error('While calling siren.turnOn.', 'err:', err))
-              }
+              return Promise
+                .resolve(self.siren.turnOff())
+                .catch(err => error('While calling siren.turnOff.', 'err:', err))
             }
-          ]
-        }
-        info('calling socketIo.connect')
-        return self.socketIO.connect(options)
+          },
+          {
+            system: 'ALARM',
+            type: 'MOTION_CREATED',
+            callback: data => {
+              info('MOTION_CREATED called.', 'data:', data)
+              return Promise
+                .resolve(self.siren.turnOn())
+                .catch(err => error('While calling siren.turnOn.', 'err:', err))
+            }
+          }
+        ]
+
+        info('calling pubnub')
+        return pubnubConnect(
+          self.ledConnectedToServer,
+          events,
+          {
+            subject: '/motions',
+            audience: 'urn:home-automation/alarm'
+          }
+        )
       })
       .then(() => diehard.listen()) // diehard uses 'this' context.  That is why we have to call it this way.
   }

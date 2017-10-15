@@ -27,10 +27,4 @@ if (!config.privateKey) {
   process.exit(1)
 }
 
-config.pushUrl = process.env.PUSH_URL || (config.production ? null : 'http://localhost:3005')
-if (!config.pushUrl) {
-  error('Push URL could not be found in the environment variable.  Please set \'PUSH_URL\'.')
-  process.exit(1)
-}
-
 module.exports = config

@@ -4,8 +4,6 @@ This repository contains the raspberry-pi client for the alarm's siren.
 [![JavaScript Style Guide][standard-image]][standard-url]
 [![Dependencies][dependencies-image]][dependencies-url]
 [![DevDependencies][dependencies-dev-image]][dependencies-dev-url]
-[![Build Status][travis-image]][travis-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
 
 I suggest you first [read][overview-url] about the different components of the home automation application.
 This will help you understand better the general architecture and different functions of the system.
@@ -22,6 +20,8 @@ __PINS\_CLIENT\_UP__ (optional): GPIO pin (output) that sets to high when client
 __PINS\_CONNECTED\_TO\_SERVER__ (optional): GPIO pin (output) that sets to high when client is connected to server. Default: `none`  
 __PINS\_SIREN\_ACTIVE\_SIGNAL__ (required): GPIO pin (output) that turns on the relay that connected to the siren.  
 __PRIVATE\_KEY__ (required): generated private key.  Public key should be shared with the [authentication][auth-url] server. See [here][private-public-keys-url].  
+__PUBNUB\_PUBLISH\_KEY__ (required): PubNub's publisher key.  
+__PUBNUB\_SUBSCRIBE\_KEY__ (requireD): = PubNub's subscriber key.  
 
 \<TODO\> Circuit Diagram
 

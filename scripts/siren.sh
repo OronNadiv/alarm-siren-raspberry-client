@@ -12,4 +12,6 @@ export PRIVATE_KEY= # PASTE GENERATED PRIVATE KEY
 export NODE_ENV=production
 export LOGIN_URL= # https://<LOGIN_SERVER_URL>
 export PINS_SIREN_ACTIVE_SIGNAL= # <GPIO PIN FOR MOTION SENSOR>
+export PUBNUB_PUBLISH_KEY= # pubnub publish key
+export PUBNUB_SUBSCRIBE_KEY= # pubnub subscribe key
 npm start

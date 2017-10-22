@@ -7,6 +7,7 @@ const LED = require('raspberry-pi-led')
 const Siren = require('./siren')
 const Promise = require('bluebird')
 const pubnubConnect = require('./pubnub')
+const exit = require('./exit')
 
 class Client {
   constructor () {
@@ -39,7 +40,10 @@ class Client {
               }
               return Promise
                 .resolve(self.siren.turnOff())
-                .catch(err => error('While calling siren.turnOff.', 'err:', err))
+                .catch(err => {
+                  error('While calling siren.turnOff.', 'err:', err)
+                  return exit(3)
+                })
             }
           },
           {
@@ -49,7 +53,10 @@ class Client {
               info('MOTION_CREATED called.', 'data:', data)
               return Promise
                 .resolve(self.siren.turnOn())
-                .catch(err => error('While calling siren.turnOn.', 'err:', err))
+                .catch(err => {
+                  error('While calling siren.turnOn.', 'err:', err)
+                  return exit(4)
+                })
             }
           }
         ]

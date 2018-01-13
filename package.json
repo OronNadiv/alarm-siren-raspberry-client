@@ -26,7 +26,7 @@
     "diehard": "^1.5.2",
     "home-automation-pubnub": "^0.4.7",
     "jsonwebtoken": "^8.1.0",
-    "jwt-generator": "^3.0.2",
+    "jwt-generator": "^3.0.3",
     "moment": "^2.20.1",
     "pi-gpio": "^0.0.8",
     "raspberry-pi-led": "^2.0.0",

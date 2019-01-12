@@ -10,8 +10,8 @@
   },
   "license": "AGPL-3.0",
   "engines": {
-    "node": "^8",
-    "npm": "^5"
+    "node": "^10",
+    "npm": "^6"
   },
   "scripts": {
     "lint": "eslint .",
@@ -28,7 +28,7 @@
     "jsonwebtoken": "^8.3.0",
     "jwt-generator": "^3.1.0",
     "moment": "^2.22.2",
-    "pi-gpio": "^0.0.8",
+    "rpi-gpio": "^2.1.2",
     "raspberry-pi-led": "^2.1.0",
     "touch": "^3.1.0"
   },
